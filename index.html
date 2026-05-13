@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body{
+    background: linear-gradient(to right, skyblue, deepskyblue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 30%;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.419);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input{
+    border: none;
+    border-bottom: 1px solid white;
+    background: none;
+    padding: 10px;
+    width: 250px;
+    color: white;
+    outline: none;
+}
+
+input::placeholder{
+    color: white;
+}
+
+button{
+    background-color: white;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: skyblue;
+}
+
+button:hover{
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 10px 0 rgba(42, 190, 248, 0.775);
+}
+
+.box{
+    text-align: center;
+}
+
+img{
+    width: 120px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <input type="search" placeholder="Enter a city name">
+        <button>Search</button>
+    </div>
+
+    <div class="box">
+        <h2 class="city"></h2>
+        <h3 class="weather"></h3>
+        <img class="icon" src="">
+        <h1 class="temp"></h1>
+    </div>
+
+</div>
+
+<script>
+const API_KEY = "YOUR_API_KEY";
+
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
+
+const city = document.querySelector(".city");
+const weather = document.querySelector(".weather");
+const icon = document.querySelector(".icon");
+const temp = document.querySelector(".temp");
+
+async function weather() {
+
+    const response =
+    await fetch("https://wttr.in/Taraz?format=j1");
+
+    const data = await response.json();
+
+    console.log(data);
+
+    h1.innerHTML =
+    data.current_condition[0].temp_C + "°C";
+
+    h2.innerHTML =
+    data.current_condition[0].weatherDesc[0].value;
+
+    img.src =
+    data.current_condition[0].weatherIconUrl[0].value;
+
+}
+
+weather()
+
+btn.addEventListener("click", weather);
+
+</script>
+
+</body>
+</html>
